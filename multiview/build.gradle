@@ -35,7 +35,7 @@ ext {
     siteUrl = 'https://github.com/llxdaxia/CellView'
     gitUrl = 'https://github.com/llxdaxia/CellView.git'
 
-    libraryVersion = '0.1.1'//版本号
+    libraryVersion = '0.1.2'//版本号
     libraryName = 'CellView'//项目名字，没什么用
     libraryDescription = 'Show some view in a view group for Android'//项目描述，没什么用
 

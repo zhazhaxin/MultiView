@@ -2,7 +2,7 @@
 
 gradle依赖
 
-    compile 'cn.alien95:multiview:0.1.1'
+    compile 'cn.alien95:multiview:0.1.2'
     
 ###MultiView基本使用：
 
