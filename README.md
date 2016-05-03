@@ -9,11 +9,14 @@ gradle依赖
 xml布局文件
 
 ```xml
-     <cn.alien95.multiview.view.MultiView
+    <cn.alien95.view.MultiView
         android:id="@+id/multi_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:background="#f1506d"
+        app:divideSpace="8dp"
+        app:placeholder="@drawable/holder"/>
 ```
 
  - 设置item之间的间隔`app:divideSpace="8dp"`
