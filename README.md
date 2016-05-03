@@ -92,7 +92,7 @@ java代码:
 在manifests文件中添加
 
 ```xml
-   <activity android:name="cn.alien95.multiview.ui.ViewImageActivity"/>
+   <activity android:name="cn.alien95.view.ui.ViewImageActivity"/>
 ```
 
 不管是否使用MultiView，其实都可以使用ViewImageActivity，只需要在跳转Activity的时候绑定好数据，如：
