@@ -57,7 +57,24 @@ public class ViewImageActivity extends AppCompatActivity {
 
         viewPager.setAdapter(new ImageAdapter());
         viewPager.setCurrentItem(position);
-        number.setText(position + "/" + dataLength);
+        number.setText(position + 1 + "/" + dataLength);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                number.setText(viewPager.getCurrentItem() + 1 + "/" + dataLength);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
@@ -82,7 +99,6 @@ public class ViewImageActivity extends AppCompatActivity {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            number.setText(viewPager.getCurrentItem() + 1 + "/" + dataLength);
             return view == object;
         }
 
