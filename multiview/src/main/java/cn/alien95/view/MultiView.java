@@ -118,9 +118,6 @@ public class MultiView extends ViewGroup {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         Log.i(TAG, "onLayout");
 
-//        childWidth = getChildAt(0).getMeasuredWidth();
-//        childHeight = getChildAt(0).getMeasuredHeight();
-
         if (childCount == 1) {
             getChildAt(0).layout(divideSpace, divideSpace, childWidth + divideSpace, childWidth + divideSpace);
         } else if (childCount == 2) {
