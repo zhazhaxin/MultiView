@@ -2,14 +2,14 @@
 
 gradle依赖
 
-    compile 'cn.alien95:multiview:0.1.3'
+    compile 'cn.lemon:multiview:0.1.4'
     
 ###MultiView基本使用：
 
 xml布局文件
 
 ```xml
-    <cn.alien95.view.MultiView
+    <cn.lemon.multi.MultiView
         android:id="@+id/multi_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
