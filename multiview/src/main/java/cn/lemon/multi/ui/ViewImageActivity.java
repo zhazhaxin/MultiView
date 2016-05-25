@@ -1,4 +1,4 @@
-package cn.alien95.view.ui;
+package cn.lemon.multi.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,8 +18,10 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import cn.alien95.view.R;
-import cn.alien95.view.util.Util;
+import cn.lemon.multi.util.Util;
+import cn.lemon.multi.R;
+
+
 
 
 /**

@@ -1,4 +1,4 @@
-package cn.alien95.view;
+package cn.lemon.multi;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,10 +19,10 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
-import cn.alien95.view.adapter.Adapter;
-import cn.alien95.view.ui.ViewImageActivity;
-import cn.alien95.view.util.MessageNotify;
-import cn.alien95.view.util.Util;
+import cn.lemon.multi.adapter.Adapter;
+import cn.lemon.multi.ui.ViewImageActivity;
+import cn.lemon.multi.util.MessageNotify;
+import cn.lemon.multi.util.Util;
 
 
 /**

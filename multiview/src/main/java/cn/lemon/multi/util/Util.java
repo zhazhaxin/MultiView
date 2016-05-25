@@ -1,4 +1,4 @@
-package cn.alien95.view.util;
+package cn.lemon.multi.util;
 
 import android.content.Context;
 import android.content.Intent;

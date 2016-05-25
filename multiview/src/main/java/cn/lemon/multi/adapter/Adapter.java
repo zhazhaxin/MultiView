@@ -1,4 +1,4 @@
-package cn.alien95.view.adapter;
+package cn.lemon.multi.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import cn.alien95.view.util.MessageNotify;
+import cn.lemon.multi.util.MessageNotify;
 
 
 /**
