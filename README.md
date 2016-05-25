@@ -2,7 +2,7 @@
 
 gradle依赖
 
-    compile 'cn.lemon:multiview:0.1.4'
+    compile 'cn.lemon:multiview:0.1.5'
     
 ###MultiView基本使用：
 
