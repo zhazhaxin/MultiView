@@ -43,14 +43,14 @@ public class MainActivity extends AppCompatActivity {
         data.add("http://i03.pictn.sogoucdn.com/38dce26d6171afea");
         data.add("http://i04.pictn.sogoucdn.com/77f75ceaeb21f214");
         data.add("http://i03.pictn.sogoucdn.com/d9bfb2f7c2e2d996");
-//        data.add("http://i04.pictn.sogoucdn.com/da0909364b5c1724");
-//        data.add("http://i04.pictn.sogoucdn.com/c12cf1b1698529f4");
-//        data.add("http://i04.pictn.sogoucdn.com/9be326a0f5fede23");
-//        data.add("http://i03.pictn.sogoucdn.com/d8ac1d4d17e90755");
-//        data.add("http://i01.pictn.sogoucdn.com/4ed7d8270541db1c");
-//        data.add("http://i02.pictn.sogoucdn.com/0ee9291ce95ad25e");
-//        data.add("http://i02.pictn.sogoucdn.com/3819a032b8f5f79d");
-//        data.add("http://i04.pictn.sogoucdn.com/354f82e16a4999fa");
+        data.add("http://i04.pictn.sogoucdn.com/da0909364b5c1724");
+        data.add("http://i04.pictn.sogoucdn.com/c12cf1b1698529f4");
+        data.add("http://i04.pictn.sogoucdn.com/9be326a0f5fede23");
+        data.add("http://i03.pictn.sogoucdn.com/d8ac1d4d17e90755");
+        data.add("http://i01.pictn.sogoucdn.com/4ed7d8270541db1c");
+        data.add("http://i02.pictn.sogoucdn.com/0ee9291ce95ad25e");
+        data.add("http://i02.pictn.sogoucdn.com/3819a032b8f5f79d");
+        data.add("http://i04.pictn.sogoucdn.com/354f82e16a4999fa");
 
         multiView.setImages(data);
 

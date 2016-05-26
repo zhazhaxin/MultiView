@@ -2,26 +2,17 @@ package cn.lemon.multi.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import cn.lemon.multi.util.Util;
 import cn.lemon.multi.R;
-
-
+import cn.lemon.multi.util.Util;
 
 
 /**
@@ -57,7 +48,7 @@ public class ViewImageActivity extends AppCompatActivity {
         position = getIntent().getIntExtra(IMAGE_NUM, -1);
         dataLength = data.size();
 
-        viewPager.setAdapter(new ImageAdapter());
+        viewPager.setAdapter(new ImageAdapter(data));
         viewPager.setCurrentItem(position);
         number.setText(position + 1 + "/" + dataLength);
 
@@ -80,35 +71,6 @@ public class ViewImageActivity extends AppCompatActivity {
 
     }
 
-    class ImageAdapter extends PagerAdapter {
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            ImageView image = new ImageView(ViewImageActivity.this);
-            image.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            image.setAdjustViewBounds(true);
-            image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            Glide.with(ViewImageActivity.this).load(data.get(position)).into(image);
-            container.addView(image);
-            return image;
-        }
-
-
-        @Override
-        public int getCount() {
-            return data.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

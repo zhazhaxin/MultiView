@@ -12,13 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
+import cn.alien95.resthttp.view.HttpImageView;
 import cn.lemon.multi.adapter.Adapter;
 import cn.lemon.multi.ui.ViewImageActivity;
 import cn.lemon.multi.util.MessageNotify;
@@ -135,6 +134,10 @@ public class MultiView extends ViewGroup {
                             divideSpace * (i % 3 + 1) + childWidth * (i % 3 + 1), divideSpace * (i / 3 + 1) + (i / 3 + 1) * childWidth);
                 }
             } else {
+                for (int i = 0; i < 9; i++) {
+                    getChildAt(i).layout(divideSpace * (i % 3 + 1) + childWidth * (i % 3), i / 3 * childWidth + divideSpace * (i / 3 + 1),
+                            divideSpace * (i % 3 + 1) + childWidth * (i % 3 + 1), divideSpace * (i / 3 + 1) + (i / 3 + 1) * childWidth);
+                }
                 getChildAt(9).layout(divideSpace * 3 + childWidth * 2, 2 * childWidth + divideSpace * 3,
                         divideSpace * 3 + childWidth * 3, divideSpace * 3 + 3 * childWidth);
             }
@@ -185,10 +188,10 @@ public class MultiView extends ViewGroup {
         isDataFromAdapter = false;
         this.data = data;
         if (data.size() > 9) {
-            for (int i = 0; i < 9; i++) {  //前面8个item
+            for (int i = 0; i < 9; i++) {  //添加9个item
                 addView(getImageView(data.get(i), i));
             }
-            addOverNumView(9);  //第9的个item
+            addOverNumView(9);  //添加第10个item，覆盖第9个item
         } else {
             for (int i = 0; i < data.size(); i++) {
                 addView(getImageView(data.get(i), i));
@@ -232,19 +235,15 @@ public class MultiView extends ViewGroup {
      * @param url
      * @return
      */
-    public ImageView getImageView(String url, final int position) {
-        ImageView img = new ImageView(getContext());
+    public HttpImageView getImageView(String url, final int position) {
+        HttpImageView img = new HttpImageView(getContext());
         img.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         img.setScaleType(ImageView.ScaleType.CENTER_CROP);
         if (placeholder != -1) {
-            Glide.with(getContext())
-                    .load(url)
-                    .placeholder(placeholder)
-                    .into(img);
+            img.setLoadImageId(placeholder);
+            img.setImageUrl(url);
         } else {
-            Glide.with(getContext())
-                    .load(url)
-                    .into(img);
+            img.setImageUrl(url);
         }
 
         img.setOnClickListener(new OnClickListener() {

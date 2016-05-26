@@ -2,9 +2,17 @@
 
 gradle依赖
 
-    compile 'cn.lemon:multiview:0.1.5'
+    compile 'cn.lemon:multiview:0.1.6'
     
 ###MultiView基本使用：
+
+由于依赖了[RestHttp](https://github.com/llxdaxia/RestHttp)，所以初始化:
+```java
+        RestHttp.initialize(this);
+        if(BuildConfig.DEBUG){
+            RestHttp.setDebug(true,"network");
+        }
+```
 
 xml布局文件
 
@@ -92,7 +100,7 @@ java代码:
 在manifests文件中添加
 
 ```xml
-   <activity android:name="cn.alien95.view.ui.ViewImageActivity"/>
+   <activity android:name="cn.lemon.multi.ui.ViewImageActivity"/>
 ```
 
 不管是否使用MultiView，其实都可以使用ViewImageActivity，只需要在跳转Activity的时候绑定好数据，如：
@@ -108,8 +116,8 @@ java代码:
 依赖的其他库
 ```java
    compile 'com.android.support:appcompat-v7:23.1.1'
-   compile 'com.github.bumptech.glide:glide:3.6.1'
    compile 'com.android.support:support-v4:23.1.1'
+   compile 'cn.alien95:resthttp:1.0.1'
 ```
 
 ###[Demo](https://github.com/llxdaxia/MultiView/tree/dev/app)
