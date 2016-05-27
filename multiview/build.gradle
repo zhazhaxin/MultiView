@@ -28,12 +28,12 @@ dependencies {
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'multi-view'
+    bintrayName = 'cn.lemon.multiview'
 
     //依赖字段
     publishedGroupId = 'cn.lemon'
     artifact = 'multiview'
-    libraryVersion = '0.1.6'
+    libraryVersion = '0.1.6-beta1'
 
     siteUrl = 'https://github.com/llxdaxia/MultiView'
     gitUrl = 'https://github.com/llxdaxia/MultiView.git'

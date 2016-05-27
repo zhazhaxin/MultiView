@@ -35,22 +35,31 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         multiView = (MultiView) findViewById(R.id.multi_view);
 
-        data.add("http://i02.pictn.sogoucdn.com/73a90748d5e19769");
-        data.add("http://i01.pictn.sogoucdn.com/e19188bbc3966d6f");
-        data.add("http://i02.pictn.sogoucdn.com/85db79c962886004");
-        data.add("http://i01.pictn.sogoucdn.com/f44c1591194be8b9");
-        data.add("http://i01.pictn.sogoucdn.com/e3702c8458c6e5ef");
-        data.add("http://i03.pictn.sogoucdn.com/38dce26d6171afea");
-        data.add("http://i04.pictn.sogoucdn.com/77f75ceaeb21f214");
-        data.add("http://i03.pictn.sogoucdn.com/d9bfb2f7c2e2d996");
-        data.add("http://i04.pictn.sogoucdn.com/da0909364b5c1724");
-        data.add("http://i04.pictn.sogoucdn.com/c12cf1b1698529f4");
-        data.add("http://i04.pictn.sogoucdn.com/9be326a0f5fede23");
-        data.add("http://i03.pictn.sogoucdn.com/d8ac1d4d17e90755");
-        data.add("http://i01.pictn.sogoucdn.com/4ed7d8270541db1c");
-        data.add("http://i02.pictn.sogoucdn.com/0ee9291ce95ad25e");
-        data.add("http://i02.pictn.sogoucdn.com/3819a032b8f5f79d");
-        data.add("http://i04.pictn.sogoucdn.com/354f82e16a4999fa");
+        data.add("http://img03.sogoucdn.com/app/a/100520093/39ccc87f3e85c326-d833987af7322860-4ce19032c3b0f23baadb92fbb834ca57.jpg");
+        data.add("http://img03.sogoucdn.com/app/a/100520093/ff997748674109a3-a39fb229dd0dbda7-694fe393ad45dc0aa9ea5a22823a4a89.jpg");
+        data.add("http://img02.sogoucdn.com/app/a/100520093/398e25e72e0c6d43-69bdc558c3bd67b0-cfe3bbc83b1b97766b1f563b5a2ca7f7.jpg");
+        data.add("http://img03.sogoucdn.com/app/a/100520093/11388287d0e56ad7-53b51a5be5b5a2db-9e20f21c3413f36b211a6543ad164d1f.jpg");
+        data.add("http://img03.sogoucdn.com/app/a/100520093/11388287d0e56ad7-53b51a5be5b5a2db-0d4a965d46d4436ed1c7053eccb6fe70.jpg");
+        data.add("http://img03.sogoucdn.com/app/a/100520093/33707f33b97c03ef-e989d519207501fc-417f0b65c0bd38f89fa860dc6e331204.jpg");
+        data.add("http://img03.sogoucdn.com/app/a/100520093/ea54b1c5225b5b8f-1f7d693ce5c84217-c3bf467271f05ac7fb1b65bcd04075df.jpg");
+        data.add("http://img01.sogoucdn.com/app/a/100520093/ea54b1c5225b5b8f-1f7d693ce5c84217-29186a9893391156126abf6b88edb947.jpg");
+
+        data.add("http://img04.sogoucdn.com/app/a/100520024/a9fd5fa28fa88b93b3a551d77d7485af");
+        data.add("http://img03.sogoucdn.com/app/a/100520024/5ebc6321d6d250cdc60b60c63d112398");
+        data.add("http://img04.sogoucdn.com/app/a/100520024/da58c325457e35bc35ef5b88ff6e8f93");
+        data.add("http://img04.sogoucdn.com/app/a/100520024/d8cd08e9ad5e594e6072b79b16a79cb9");
+        data.add("http://img03.sogoucdn.com/app/a/100520024/e26644a572d792eb04c758fb7928cf6f");
+        data.add("http://img04.sogoucdn.com/app/a/100520024/946a9743113e25f49849280c9dc9656c");
+        data.add("http://img02.sogoucdn.com/app/a/100520024/bce976f202c4f8cafefa0de0c2532911");
+        data.add("http://img03.sogoucdn.com/app/a/100520024/d6377c755e1614d0f780f57f379b4d94");
+        data.add("http://img04.sogoucdn.com/app/a/100520024/b6a4642e202ecf33001903065a320eb8");
+        data.add("http://img01.sogoucdn.com/app/a/100520024/eb042d797dca8ba3ba1b8c73670edd92");
+        data.add("http://img03.sogoucdn.com/app/a/100520024/465fe21ffb6ea418604b09df7c3ea2d1");
+        data.add("http://img03.sogoucdn.com/app/a/100520024/5364788b23382dbd2367a213c611657c");
+        data.add("http://img02.sogoucdn.com/app/a/100520024/4ad1e20efda030a6d26b4e1ea96a10ab");
+        data.add("http://img02.sogoucdn.com/app/a/100520024/42237add31003db3e76914045adcaf2f");
+        data.add("http://img04.sogoucdn.com/app/a/100520024/37f374c5b6d1f0bd663164d7fffbe82a");
+        data.add("http://img02.sogoucdn.com/app/a/100520024/4a72e3cb439d3205d92ec7613178f3c4");
 
         multiView.setImages(data);
 

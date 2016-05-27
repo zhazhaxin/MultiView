@@ -48,7 +48,7 @@ public class ViewImageActivity extends AppCompatActivity {
         position = getIntent().getIntExtra(IMAGE_NUM, -1);
         dataLength = data.size();
 
-        viewPager.setAdapter(new ImageAdapter(data));
+        viewPager.setAdapter(new ImageAdapter(data,this));
         viewPager.setCurrentItem(position);
         number.setText(position + 1 + "/" + dataLength);
 
