@@ -104,7 +104,11 @@ public class Util {
     /**
      * 下载图片保存到APP缓存根目录下，然后通知插入图库数据库，然后通知图库显示出来
      *
+<<<<<<< HEAD
      * @param url 图片网络地址
+=======
+     * @param url  图片网络地址
+>>>>>>> e028d5533f41347e54d5061b03a77294267fdb3c
      */
     public static void downloadImage(final String url) {
         new Thread(new Runnable() {
@@ -139,6 +143,7 @@ public class Util {
                         }
                         final File img = Util.getCacheDir(Util.MD5(url) + ".jpg");
                         if(img == null || img.exists()){
+
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
@@ -149,12 +154,14 @@ public class Util {
                         }
                         try {
                             FileOutputStream out = new FileOutputStream(img);
+
                             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
                             out.flush();
                             out.close();
 
                             // 最后通知图库更新
                             mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + img.getAbsolutePath())));
+
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {

@@ -7,7 +7,8 @@ android {
     defaultConfig {
         applicationId "cn.alien95.multiviewlibrary"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 23
+
         versionCode 1
         versionName "1.0"
     }
@@ -23,8 +24,4 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile project(':multiview')
-
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
 }

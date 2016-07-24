@@ -6,7 +6,8 @@ android {
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 23
+
         versionCode 1
         versionName "1.0"
     }
@@ -29,10 +30,12 @@ ext {
     bintrayRepo = 'maven'
     bintrayName = 'multi-view'
 
+
     //依赖字段
     publishedGroupId = 'cn.lemon'
     artifact = 'multiview'
     libraryVersion = '0.1.7'
+
 
     siteUrl = 'https://github.com/llxdaxia/MultiView'
     gitUrl = 'https://github.com/llxdaxia/MultiView.git'

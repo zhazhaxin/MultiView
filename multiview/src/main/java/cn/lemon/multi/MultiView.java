@@ -29,6 +29,7 @@ public class MultiView extends ViewGroup {
 
     private static final String TAG = "MultiView";
     private static boolean isDataFromAdapter = false;
+
     private int childWidth, childHeight;
     private int divideSpace;
     private int placeholder;
@@ -63,6 +64,7 @@ public class MultiView extends ViewGroup {
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
+
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
@@ -73,8 +75,8 @@ public class MultiView extends ViewGroup {
         if (heightMode == MeasureSpec.AT_MOST) {
             Log.i(TAG, "fuck--heightMode");
         }
-
         int height;
+
         if (childCount == 1) {
             childWidth = width - divideSpace * 2;
             height = width;
@@ -168,7 +170,7 @@ public class MultiView extends ViewGroup {
                 for (int i = 0; i < adapter.getCount(); i++) {
                     addView(adapter.getView(this, i));
                 }
-        }else {
+        } else {
             setImages(data);
         }
     }

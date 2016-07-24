@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         data.add("http://img04.sogoucdn.com/app/a/100520024/d8cd08e9ad5e594e6072b79b16a79cb9");
         data.add("http://img03.sogoucdn.com/app/a/100520024/e26644a572d792eb04c758fb7928cf6f");
 
-
         multiView.setImages(data);
 
 //        adapter = new MyAdapter(this);

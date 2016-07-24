@@ -8,13 +8,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+
 import cn.lemon.multi.MultiView;
+
 
 
 /**
  * Created by linlongxin on 2015/12/31.
  */
 public abstract class Adapter<T> {
+
 
     protected static Context mContext;
 

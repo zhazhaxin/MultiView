@@ -1,8 +1,9 @@
 #MultiView --- Android显示多图或item的View
 
 gradle依赖
-
+```
     compile 'cn.lemon:multiview:0.1.7'
+```
     
 ###MultiView基本使用：
 
