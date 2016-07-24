@@ -1,0 +1,52 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:24.0.0'
+    compile 'com.android.support:appcompat-v7:24.0.0'
+
+    compile 'cn.alien95:resthttp:1.0.1'
+}
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'multi-view'
+
+    //依赖字段
+    publishedGroupId = 'cn.lemon'
+    artifact = 'multiview'
+    libraryVersion = '0.1.7'
+
+    siteUrl = 'https://github.com/llxdaxia/MultiView'
+    gitUrl = 'https://github.com/llxdaxia/MultiView.git'
+
+    libraryName = 'MultiView'
+    libraryDescription = 'Show some view in a view group for Android'
+
+    developerId = 'Lemon'
+    developerName = 'Lemon'
+    developerEmail = 'daxiallx@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+apply from: 'https://raw.githubusercontent.com/llxdaxia/GradleScript/master/install_v1.gradle'
+apply from: 'https://raw.githubusercontent.com/llxdaxia/GradleScript/master/bintray_v1.gradle'

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MultiView">
+        <attr name="divideSpace" format="dimension"/>
+        <attr name="placeholder" format="reference"/>
+    </declare-styleable>
+
+</resources>
