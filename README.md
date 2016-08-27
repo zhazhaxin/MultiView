@@ -110,7 +110,7 @@ java代码:
    compile 'cn.alien95:resthttp:1.0.5'
 ```
 
-###[Demo](https://github.com/llxdaxia/MultiView/tree/dev/demo)
+###[详细用法请看Demo](https://github.com/llxdaxia/MultiView/tree/dev/demo)
 
 ####显示图片
 
