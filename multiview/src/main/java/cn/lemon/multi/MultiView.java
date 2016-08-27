@@ -33,8 +33,8 @@ public class MultiView extends ViewGroup {
     private int childWidth, childHeight;
     private int divideSpace;
     private int placeholder;
-    private Adapter adapter;
-    private List<String> data;
+    private Adapter mAdapter;
+    private List<String> mData;
     private int childCount;
 
     public MultiView(Context context) {
@@ -146,43 +146,63 @@ public class MultiView extends ViewGroup {
 
     /**
      * 设置adapter，同时设置注册MessageNotify
-     *
-     * @param adapter
      */
     public void setAdapter(Adapter adapter) {
         isDataFromAdapter = true;
-        this.adapter = adapter;
+        this.mAdapter = adapter;
         addViews();
         adapter.attachView(this);
     }
 
     /**
-     * 添加adapter中所有的view,这里必须是public，因为抵用了MessageNotify.getInstance().registerEvent()，不然其他类不能调用
+     * 添加adapter中所有的view
      */
     public void addViews() {
         if (isDataFromAdapter) {
-            if (adapter.getCount() > 9) {
+            if (mAdapter.getCount() > 9) {
                 for (int i = 0; i < 9; i++) {
-                    addView(adapter.getView(this, i));
+                    configView(i);
                 }
                 addOverNumView(9);
-            } else
-                for (int i = 0; i < adapter.getCount(); i++) {
-                    addView(adapter.getView(this, i));
+            } else {
+                for (int i = 0; i < mAdapter.getCount(); i++) {
+                    configView(i);
                 }
+            }
         } else {
-            setImages(data);
+            setImages(mData);
+        }
+    }
+
+    public void configView(int position) {
+        View item;
+        addView(item = mAdapter.getView(this, position));
+        mAdapter.setData(mAdapter.mData.get(position));
+        item.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapter.setOnItemClick();
+            }
+        });
+    }
+
+    public void addView(int position) {
+        if (isDataFromAdapter) {
+            if (position > 8) {
+                addOverNumView(9);
+                return;
+            }
+            addView(mAdapter.getView(this, position));
+            mAdapter.setData(mAdapter.mData.get(position));
         }
     }
 
     /**
      * 同上
-     *
-     * @param data
      */
     public void setImages(List<String> data) {
         isDataFromAdapter = false;
-        this.data = data;
+        this.mData = data;
         if (data.size() > 9) {
             for (int i = 0; i < 9; i++) {  //添加9个item
                 addView(getImageView(data.get(i), i));
@@ -197,8 +217,6 @@ public class MultiView extends ViewGroup {
 
     /**
      * 当数据是死数据时：推荐使用此方法
-     *
-     * @param data 数据集合
      */
     public void setImages(String[] data) {
         setImages(Arrays.asList(data));
@@ -217,9 +235,9 @@ public class MultiView extends ViewGroup {
         textView.setBackgroundColor(Color.parseColor("#33000000"));
         textView.setGravity(Gravity.CENTER);
         if (isDataFromAdapter) {
-            textView.setText("+" + (adapter.getCount() - 9));
+            textView.setText("+" + (mAdapter.getCount() - 9));
         } else
-            textView.setText("+" + (data.size() - 9));
+            textView.setText("+" + (mData.size() - 9));
 
         addView(textView, position);
         Log.i(TAG, "添加最后一个view");
@@ -227,9 +245,6 @@ public class MultiView extends ViewGroup {
 
     /**
      * 获取一个ImageView
-     *
-     * @param url
-     * @return
      */
     public HttpImageView getImageView(String url, final int position) {
         HttpImageView img = new HttpImageView(getContext());
@@ -247,7 +262,7 @@ public class MultiView extends ViewGroup {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ViewImageActivity.class);
                 intent.putExtra(ViewImageActivity.IMAGE_NUM, position);
-                intent.putExtra(ViewImageActivity.IMAGES_DATA_LIST, (Serializable) data);
+                intent.putExtra(ViewImageActivity.IMAGES_DATA_LIST, (Serializable) mData);
                 getContext().startActivity(intent);
             }
         });

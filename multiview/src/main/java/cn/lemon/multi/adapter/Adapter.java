@@ -19,19 +19,18 @@ import cn.lemon.multi.MultiView;
  */
 public abstract class Adapter<T> {
 
-
     protected static Context mContext;
 
-    private MultiView mView;
+    private MultiView mMultiView;
 
-    private List<T> mData = new ArrayList<>();
+    public List<T> mData = new ArrayList<>();
 
     public Adapter(Context context) {
         mContext = context;
     }
 
     public void attachView(MultiView view){
-        mView = view;
+        mMultiView = view;
     }
 
     public abstract View getView(ViewGroup parent, int position);
@@ -46,7 +45,7 @@ public abstract class Adapter<T> {
 
     public void add(T object) {
         mData.add(object);
-        notifyDataChanged();
+        notifyItemInsert(mData.indexOf(object));
     }
 
     public void addAll(List<T> mData) {
@@ -65,7 +64,15 @@ public abstract class Adapter<T> {
     }
 
     public void notifyDataChanged() {
-        mView.addViews();
+        mMultiView.addViews();
     }
+    public void notifyItemInsert(int position){
+        mMultiView.addView(position);
+    }
+    public void setData(T object){
 
+    }
+    public void setOnItemClick(){
+
+    }
 }

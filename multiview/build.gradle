@@ -23,7 +23,7 @@ dependencies {
     compile 'com.android.support:support-v4:24.0.0'
     compile 'com.android.support:appcompat-v7:24.0.0'
 
-    compile 'cn.alien95:resthttp:1.0.1'
+    compile 'cn.alien95:resthttp:1.0.5'
 }
 
 ext {
@@ -34,7 +34,7 @@ ext {
     //依赖字段
     publishedGroupId = 'cn.lemon'
     artifact = 'multiview'
-    libraryVersion = '0.1.7'
+    libraryVersion = '0.1.8'
 
 
     siteUrl = 'https://github.com/llxdaxia/MultiView'

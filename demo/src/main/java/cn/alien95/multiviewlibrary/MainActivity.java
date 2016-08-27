@@ -1,11 +1,10 @@
 package cn.alien95.multiviewlibrary;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -59,26 +58,28 @@ public class MainActivity extends AppCompatActivity {
 
     class MyAdapter extends Adapter<String> {
 
+        private TextView textView;
         public MyAdapter(Context context) {
             super(context);
         }
 
         @Override
         public View getView(ViewGroup parent, int position) {
-            TextView textView = new TextView(mContext);
-            textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
-            textView.setTextSize(16);
-            textView.setText("MultiView");
-            textView.setTextColor(Color.parseColor("#ffffff"));
-            textView.setBackgroundColor(Color.parseColor("#FF2F4F89"));
-            textView.setGravity(Gravity.CENTER);
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Util.Toast("点击事件");
-                }
-            });
-            return textView;
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item,parent,false);
+            textView = (TextView) view.findViewById(R.id.text);
+            return view;
+        }
+
+        @Override
+        public void setData(String object) {
+            super.setData(object);
+            textView.setText(object);
+        }
+
+        @Override
+        public void setOnItemClick() {
+            super.setOnItemClick();
+            Util.Toast("点击事件");
         }
     }
 

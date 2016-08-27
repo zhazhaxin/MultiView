@@ -1,1 +1,1 @@
-include ':app', ':multiview'
+include ':demo', ':multiview'

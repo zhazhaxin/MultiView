@@ -104,11 +104,6 @@ public class Util {
     /**
      * 下载图片保存到APP缓存根目录下，然后通知插入图库数据库，然后通知图库显示出来
      *
-<<<<<<< HEAD
-     * @param url 图片网络地址
-=======
-     * @param url  图片网络地址
->>>>>>> e028d5533f41347e54d5061b03a77294267fdb3c
      */
     public static void downloadImage(final String url) {
         new Thread(new Runnable() {
