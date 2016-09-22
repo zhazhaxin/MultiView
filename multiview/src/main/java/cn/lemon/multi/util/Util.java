@@ -57,12 +57,10 @@ public class Util {
      */
     public static File getCacheDir(String imgName) {
         File rootDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), IMG_DIR);
-        if(rootDir.exists()){
-            return new File(rootDir, imgName);
-        }else {
+        if (!rootDir.exists()) {
             rootDir.mkdir();
-            return rootDir;
         }
+        return new File(rootDir, imgName);
     }
 
     /**
@@ -103,7 +101,6 @@ public class Util {
 
     /**
      * 下载图片保存到APP缓存根目录下，然后通知插入图库数据库，然后通知图库显示出来
-     *
      */
     public static void downloadImage(final String url) {
         new Thread(new Runnable() {
@@ -136,9 +133,8 @@ public class Util {
                             });
                             return;
                         }
-                        final File img = Util.getCacheDir(Util.MD5(url) + ".jpg");
-                        if(img == null || img.exists()){
-
+                        final File img = getCacheDir(MD5(url) + ".jpg");
+                        if (img == null && img.exists()) {
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
@@ -147,6 +143,7 @@ public class Util {
                             });
                             return;
                         }
+
                         try {
                             FileOutputStream out = new FileOutputStream(img);
 
@@ -160,7 +157,7 @@ public class Util {
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Util.Toast("已保存在APP的缓存目录");
+                                    Util.Toast("已保存在你的手机上");
 
                                 }
                             });
@@ -177,5 +174,4 @@ public class Util {
             }
         }).start();
     }
-
 }

@@ -3,7 +3,8 @@ package cn.lemon.multi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.graphics.Color;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,17 +30,27 @@ import cn.lemon.multi.util.Util;
 public class MultiView extends ViewGroup {
 
     private static final String TAG = "MultiView";
-    private static boolean isDataFromAdapter = false;
+    private int TEXT_NUM_COLOR = 0xffffffff;
+    private int TEXT_NUM_BACKGROUND_COLOR = 0x33000000;
+    private static boolean isImageURL = true;
+    private static boolean isBitmap = false;
+    private static boolean isUri = false;
 
     private int childWidth, childHeight;
-    private int divideSpace;
+    private int divideSpace; //默认2dp
     private int placeholder;
     private Adapter mAdapter;
-    private List<String> mData;
     private int childCount;
 
+    //不通过Adapter设置图片
+    private List<String> mData; //针对
+    private List<Bitmap> mBitmaps;
+    private List<Uri> mUris;
+
+    private TextView mTextNum;
+
     public MultiView(Context context) {
-        super(context, null);
+        this(context, null);
     }
 
     public MultiView(Context context, AttributeSet attrs) {
@@ -49,8 +61,10 @@ public class MultiView extends ViewGroup {
         super(context, attrs, defStyleAttr);
         Util.init(context);
 
+        mData = new ArrayList<>();
+
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MultiView);
-        divideSpace = (int) typedArray.getDimension(R.styleable.MultiView_divideSpace, Util.dip2px(4));
+        divideSpace = (int) typedArray.getDimension(R.styleable.MultiView_divideSpace, Util.dip2px(2));
         placeholder = typedArray.getResourceId(R.styleable.MultiView_placeholder, -1);
         typedArray.recycle();
     }
@@ -77,7 +91,10 @@ public class MultiView extends ViewGroup {
         }
         int height;
 
-        if (childCount == 1) {
+        if (childCount == 0) {
+            width = 0;
+            height = 0;
+        } else if (childCount == 1) {
             childWidth = width - divideSpace * 2;
             height = width;
         } else if (childCount == 2) {
@@ -148,7 +165,7 @@ public class MultiView extends ViewGroup {
      * 设置adapter，同时设置注册MessageNotify
      */
     public void setAdapter(Adapter adapter) {
-        isDataFromAdapter = true;
+        isImageURL = false;
         this.mAdapter = adapter;
         addViews();
         adapter.attachView(this);
@@ -158,7 +175,7 @@ public class MultiView extends ViewGroup {
      * 添加adapter中所有的view
      */
     public void addViews() {
-        if (isDataFromAdapter) {
+        if (!isImageURL) {
             if (mAdapter.getCount() > 9) {
                 for (int i = 0; i < 9; i++) {
                     configView(i);
@@ -187,7 +204,7 @@ public class MultiView extends ViewGroup {
     }
 
     public void addView(int position) {
-        if (isDataFromAdapter) {
+        if (!isImageURL) {
             if (position > 8) {
                 addOverNumView(9);
                 return;
@@ -198,21 +215,106 @@ public class MultiView extends ViewGroup {
     }
 
     /**
-     * 同上
+     * 网络图片地址
      */
     public void setImages(List<String> data) {
-        isDataFromAdapter = false;
-        this.mData = data;
+        isImageURL = true;
+        mData = data;
         if (data.size() > 9) {
             for (int i = 0; i < 9; i++) {  //添加9个item
-                addView(getImageView(data.get(i), i));
+                addView(getImageView(data.get(i), i), i);
             }
             addOverNumView(9);  //添加第10个item，覆盖第9个item
         } else {
             for (int i = 0; i < data.size(); i++) {
-                addView(getImageView(data.get(i), i));
+                addView(getImageView(data.get(i), i), i);
             }
         }
+    }
+
+    public void addImage(String url) {
+        mData.add(url);
+        if (mData.size() > 9 && mTextNum != null) {
+            mTextNum.setText("+" + (mData.size() - 9));  //添加第10个item，覆盖第9个item
+        } else {
+            int index = mData.size() - 1;
+            addView(getImageView(mData.get(index), index), index);
+        }
+    }
+
+    /**
+     * Bitmap
+     */
+    public void setBitmaps(List<Bitmap> bitmaps) {
+        isImageURL = false;
+        isBitmap = true;
+        mBitmaps = bitmaps;
+        if (bitmaps.size() > 9) {
+            for (int i = 0; i < 9; i++) {  //添加9个item
+                addView(getImageView(bitmaps.get(i), i), i);
+            }
+            addOverNumView(9);  //添加第10个item，覆盖第9个item
+        } else {
+            for (int i = 0; i < bitmaps.size(); i++) {
+                addView(getImageView(bitmaps.get(i), i), i);
+            }
+        }
+    }
+
+    public void addBitmap(Bitmap bitmap) {
+        if (mBitmaps == null) {
+            mBitmaps = new ArrayList<>();
+        }
+        mBitmaps.add(bitmap);
+        if (mBitmaps.size() > 9 && mTextNum != null) {
+            mTextNum.setText("+" + (mBitmaps.size() - 9));  //添加第10个item，覆盖第9个item
+        } else {
+            int index = mBitmaps.size() - 1;
+            addView(getImageView(mBitmaps.get(index), index), index);
+        }
+    }
+
+    /**
+     * Uri
+     */
+    public void setUris(List<Uri> uris) {
+        isImageURL = false;
+        isUri = true;
+        mUris = uris;
+        if (uris.size() > 9) {
+            for (int i = 0; i < 9; i++) {  //添加9个item
+                addView(getImageView(uris.get(i), i), i);
+            }
+            addOverNumView(9);  //添加第10个item，覆盖第9个item
+        } else {
+            for (int i = 0; i < uris.size(); i++) {
+                addView(getImageView(uris.get(i), i), i);
+            }
+        }
+    }
+
+    public void addUri(Uri uri) {
+        if (mUris == null) {
+            mUris = new ArrayList<>();
+        }
+        mUris.add(uri);
+        if (mUris.size() > 9 && mTextNum != null) {
+            mTextNum.setText("+" + (mUris.size() - 9));  //添加第10个item，覆盖第9个item
+        } else {
+            int index = mUris.size() - 1;
+            addView(getImageView(mUris.get(index), index), index);
+        }
+    }
+
+    public void clear() {
+        mData.clear();
+        if (mBitmaps != null) {
+            mBitmaps.clear();
+        }
+        if (mUris != null) {
+            mUris.clear();
+        }
+        removeAllViews();
     }
 
     /**
@@ -227,25 +329,27 @@ public class MultiView extends ViewGroup {
      */
     public void addOverNumView(int position) {
 
-        TextView textView = new TextView(getContext());
-        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+        mTextNum = new TextView(getContext());
+        mTextNum.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
-        textView.setTextSize(24);
-        textView.setTextColor(Color.parseColor("#ffffff"));
-        textView.setBackgroundColor(Color.parseColor("#33000000"));
-        textView.setGravity(Gravity.CENTER);
-        if (isDataFromAdapter) {
-            textView.setText("+" + (mAdapter.getCount() - 9));
+        mTextNum.setTextSize(24);
+        mTextNum.setTextColor(TEXT_NUM_COLOR);
+        mTextNum.setBackgroundColor(TEXT_NUM_BACKGROUND_COLOR);
+        mTextNum.setGravity(Gravity.CENTER);
+        if (isImageURL) {
+            mTextNum.setText("+" + (mData.size() - 9));
+        } else if (isBitmap) {
+            mTextNum.setText("+" + (mBitmaps.size() - 9));
+        } else if (isUri) {
+            mTextNum.setText("+" + (mUris.size() - 9));
         } else
-            textView.setText("+" + (mData.size() - 9));
+            mTextNum.setText("+" + (mAdapter.getCount() - 9));
 
-        addView(textView, position);
+        addView(mTextNum, position);
         Log.i(TAG, "添加最后一个view");
     }
 
-    /**
-     * 获取一个ImageView
-     */
+    //通过图片网络地址生成HttpImageView实例
     public HttpImageView getImageView(String url, final int position) {
         HttpImageView img = new HttpImageView(getContext());
         img.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
@@ -266,6 +370,24 @@ public class MultiView extends ViewGroup {
                 getContext().startActivity(intent);
             }
         });
+        return img;
+    }
+
+    //通过Bitmap生成HttpImageView实例
+    public HttpImageView getImageView(Bitmap bitmap, final int position) {
+        HttpImageView img = new HttpImageView(getContext());
+        img.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        img.setImageBitmap(bitmap);
+        return img;
+    }
+
+    //通过Uri生成HttpImageView实例
+    public HttpImageView getImageView(Uri uri, final int position) {
+        HttpImageView img = new HttpImageView(getContext());
+        img.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        img.setImageURI(uri);
         return img;
     }
 
