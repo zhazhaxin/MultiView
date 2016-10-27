@@ -114,9 +114,9 @@ java代码:
 
 ####显示图片
 
-<img src="multi_image.png" width="320" height="569" />
-<img src="detail.png" width="320" height="569" />
+<img src="screenshot/multi_image.png" width="320" height="569" />
+<img src="screenshot/detail.png" width="320" height="569" />
 
 ####自定义item
 
-<img src="multi_item.png" width="320" height="569" />
+<img src="screenshot/multi_item.png" width="320" height="569" />
