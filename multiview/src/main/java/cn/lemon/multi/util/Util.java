@@ -1,10 +1,14 @@
 package cn.lemon.multi.util;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -26,7 +30,7 @@ import java.security.NoSuchAlgorithmException;
 public class Util {
 
     //下载图片目录地址
-    private static final String IMG_DIR = "Download_multi_view";
+    private static final String IMG_DIR = "Download_Pictures";
 
     private static Context mContext;
 
@@ -51,12 +55,10 @@ public class Util {
     }
 
     /**
-     * 获取根目录下的cache地址
-     *
-     * @return
+     * 获取app缓存图片文件
      */
-    public static File getCacheDir(String imgName) {
-        File rootDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), IMG_DIR);
+    public static File getImageFile(String imgName) {
+        File rootDir = new File(mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES), IMG_DIR);
         if (!rootDir.exists()) {
             rootDir.mkdir();
         }
@@ -83,9 +85,6 @@ public class Util {
 
     /**
      * 字节转换成16进制字符串
-     *
-     * @param bytes
-     * @return
      */
     private static String bytesToHexString(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
@@ -133,7 +132,7 @@ public class Util {
                             });
                             return;
                         }
-                        final File img = getCacheDir(MD5(url) + ".jpg");
+                        final File img = getImageFile(MD5(url) + ".jpg");
                         if (img == null && img.exists()) {
                             handler.post(new Runnable() {
                                 @Override
@@ -173,5 +172,15 @@ public class Util {
                 }
             }
         }).start();
+    }
+
+    /**
+     * 获取状态栏高度
+     */
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
+    public static int getStatusBarHeight(Activity activity) {
+        Rect frame = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        return frame.top;
     }
 }

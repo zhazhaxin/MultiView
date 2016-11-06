@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.lemon.multi.MultiView;
-import cn.lemon.multi.adapter.Adapter;
+import cn.lemon.multi.adapter.MultiAdapter;
 import cn.lemon.multi.util.Util;
 
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    class MyAdapter extends Adapter<String> {
+    class MyAdapter extends MultiAdapter<String> {
 
         private TextView textView;
         public MyAdapter(Context context) {

@@ -34,7 +34,7 @@ ext {
     //依赖字段
     publishedGroupId = 'cn.lemon'
     artifact = 'multiview'
-    libraryVersion = '0.1.9'
+    libraryVersion = '1.0.0'
 
 
     siteUrl = 'https://github.com/llxdaxia/MultiView'

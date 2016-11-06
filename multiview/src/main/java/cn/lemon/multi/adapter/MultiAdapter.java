@@ -17,15 +17,15 @@ import cn.lemon.multi.MultiView;
 /**
  * Created by linlongxin on 2015/12/31.
  */
-public abstract class Adapter<T> {
+public abstract class MultiAdapter<T> {
 
     protected static Context mContext;
 
     private MultiView mMultiView;
 
-    public List<T> mData = new ArrayList<>();
+    private List<T> mData = new ArrayList<>();
 
-    public Adapter(Context context) {
+    public MultiAdapter(Context context) {
         mContext = context;
     }
 
@@ -41,6 +41,10 @@ public abstract class Adapter<T> {
 
     public T getItem(int position){
         return mData.get(position);
+    }
+
+    public List<T> getData(){
+        return mData;
     }
 
     public void add(T object) {

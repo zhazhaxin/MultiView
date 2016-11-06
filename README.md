@@ -1,13 +1,16 @@
-#MultiView --- Android显示多图或item的View
+#Android九宫格显示多图或item
 
-gradle依赖
+
+##gradle依赖
+
 ```
-    compile 'cn.lemon:multiview:0.1.9'
+    compile 'cn.lemon:multiview:1.1.0'
 ```
     
-###MultiView基本使用：
+##MultiView
 
-由于依赖了[RestHttp](https://github.com/llxdaxia/RestHttp)，所以初始化:
+ - 由于依赖了[RestHttp](https://github.com/llxdaxia/RestHttp)加载网络图片，需初始化
+
 ```
   RestHttp.initialize(this);
   if(BuildConfig.DEBUG){
@@ -15,7 +18,7 @@ gradle依赖
   }
 ```
 
-xml布局文件
+ - xml布局文件
 
 ```xml
     <cn.lemon.multi.MultiView
@@ -28,10 +31,10 @@ xml布局文件
         app:placeholder="@drawable/holder"/>
 ```
 
- - 设置item之间的间隔`app:divideSpace="8dp"`
- - 设置占位图`app:placeholder="@drawable/holder"`
+ 设置item之间的间隔`app:divideSpace="8dp"`
+ 设置占位图`app:placeholder="@drawable/holder"`
  
-java代码:
+ - Java代码
 
 ```
  multiView = (multiView) findViewById(R.id.cell_view);
@@ -39,16 +42,18 @@ java代码:
 
  data.add("http://i02.pictn.sogoucdn.com/73a90748d5e19769");
  data.add("http://i01.pictn.sogoucdn.com/e19188bbc3966d6f");
- data.add("http://i02.pictn.sogoucdn.com/85db79c962886004");
- data.add("http://i01.pictn.sogoucdn.com/f44c1591194be8b9");
 
  multiView.setImages(data);   设置图片资源
 ```      
 
-如果你不只是显示图片，需要自定义item的情况，这个时候就需要添加一个自定义Adapter继承Adapter：
+ - 自定义Adapter
+
+ >如果需显示的不是图片，而是复杂的item，须自定义Adapter
+
+ - 继承MultiAdapter
 
 ```java
-    class MyAdapter extends Adapter<String> {
+    class MyAdapter extends MultiAdapter<String> {
 
         private TextView textView;
         public MyAdapter(Context context) {
@@ -65,19 +70,18 @@ java代码:
         @Override
         public void setData(String object) {
             super.setData(object);
-            //view绑定数据
             textView.setText(object);
         }
 
         @Override
         public void setOnItemClick() {
             super.setOnItemClick();
-            //item点击事件
+            Util.Toast("点击事件");
         }
     }
 ```
 
-设置Adapter，添加数据就好了
+ - 给MultiView设置MultiAdapter，并添加数据
 
 ```
    adapter = new MyAdapter(this);
@@ -85,21 +89,25 @@ java代码:
    adapter.addAll(data);
 ```
 
-###ViewImageActivity 基本使用：
+##ViewImageActivity
 
-在manifests文件中添加
+>显示大图
+
+ - manifests文件中添加
 
 ```xml
    <activity android:name="cn.lemon.multi.ui.ViewImageActivity"/>
 ```
 
-不管是否使用MultiView，其实都可以使用ViewImageActivity，只需要在跳转Activity的时候绑定好数据，如：
+ - 虽然ViewImageActivity主要是联合MultiView使用，但是其实不管是否使用MultiView，
+ 同样可以使用ViewImageActivity，只需要在跳转Activity的时候绑定好数据，如：
 
 ```
-   intent.putExtra(LookImageActivity.IMAGES_DATA_LIST, (Serializable) picUrlData);   //这里的数据集合必须是List<Stirng>
-   intent.putExtra(LookImageActivity.IMAGE_NUM, data.indexOf(object));
+  Intent intent = new Intent(itemView.getContext(),ViewImageActivity.class);
+  intent.putExtra(ViewImageActivity.IMAGES_DATA_LIST, (Serializable) getData());
+  intent.putExtra(ViewImageActivity.IMAGE_NUM, getAdapterPosition());
+  itemView.getContext().startActivity(intent);
 ```
-主要还是使用在加载多张图片的时候和MultiView联合使用。
 
 ####注意事项
 

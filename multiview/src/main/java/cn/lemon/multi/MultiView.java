@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.alien95.resthttp.view.HttpImageView;
-import cn.lemon.multi.adapter.Adapter;
+import cn.lemon.multi.adapter.MultiAdapter;
 import cn.lemon.multi.ui.ViewImageActivity;
 import cn.lemon.multi.util.Util;
 
@@ -39,7 +39,7 @@ public class MultiView extends ViewGroup {
     private int childWidth, childHeight;
     private int divideSpace; //默认2dp
     private int placeholder;
-    private Adapter mAdapter;
+    private MultiAdapter mAdapter;
     private int childCount;
 
     //不通过Adapter设置图片
@@ -164,7 +164,7 @@ public class MultiView extends ViewGroup {
     /**
      * 设置adapter，同时设置注册MessageNotify
      */
-    public void setAdapter(Adapter adapter) {
+    public void setAdapter(MultiAdapter adapter) {
         isImageURL = false;
         this.mAdapter = adapter;
         addViews();
@@ -194,7 +194,7 @@ public class MultiView extends ViewGroup {
     public void configView(int position) {
         View item;
         addView(item = mAdapter.getView(this, position));
-        mAdapter.setData(mAdapter.mData.get(position));
+        mAdapter.setData(mAdapter.getItem(position));
         item.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -210,7 +210,7 @@ public class MultiView extends ViewGroup {
                 return;
             }
             addView(mAdapter.getView(this, position));
-            mAdapter.setData(mAdapter.mData.get(position));
+            mAdapter.setData(mAdapter.getItem(position));
         }
     }
 
