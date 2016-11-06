@@ -4,7 +4,7 @@
 ##gradle依赖
 
 ```
-    compile 'cn.lemon:multiview:1.1.0'
+    compile 'cn.lemon:multiview:1.0.0'
 ```
     
 ##MultiView
@@ -120,11 +120,11 @@
 
 ###[详细用法请看Demo](https://github.com/llxdaxia/MultiView/tree/dev/demo)
 
-####显示图片
+###九宫格
 
 <img src="screenshot/multi_image.png" width="320" height="569" />
 <img src="screenshot/detail.png" width="320" height="569" />
 
-####自定义item
+###自定义Adapter
 
 <img src="screenshot/multi_item.png" width="320" height="569" />
