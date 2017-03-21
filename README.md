@@ -1,13 +1,13 @@
-#Android九宫格显示多图或item
+# Android九宫格显示多图或item
 
 
-##gradle依赖
+## gradle依赖
 
 ```
     compile 'cn.lemon:multiview:1.0.0'
 ```
     
-##MultiView
+## MultiView
 
  - 由于依赖了[RestHttp](https://github.com/llxdaxia/RestHttp)加载网络图片，需初始化
 
@@ -48,7 +48,7 @@
 
  - 自定义Adapter
 
- >如果需显示的不是图片，而是复杂的item，须自定义Adapter
+ >如果需显示的不是图片，而是复杂的item，需自定义Adapter
 
  - 继承MultiAdapter
 
@@ -81,7 +81,7 @@
     }
 ```
 
- - 给MultiView设置MultiAdapter，并添加数据
+ - 给 MultiView 设置 MultiAdapter，并添加数据
 
 ```
    adapter = new MyAdapter(this);
@@ -89,18 +89,18 @@
    adapter.addAll(data);
 ```
 
-##ViewImageActivity
+## ViewImageActivity
 
 >显示大图
 
- - manifests文件中添加
+ - manifests 文件中添加
 
 ```xml
    <activity android:name="cn.lemon.multi.ui.ViewImageActivity"/>
 ```
 
- - 虽然ViewImageActivity主要是联合MultiView使用，但是其实不管是否使用MultiView，
- 同样可以使用ViewImageActivity，只需要在跳转Activity的时候绑定好数据，如：
+ - 虽然 ViewImageActivity 主要是联合 MultiView 使用，但是其实不管是否使用 MultiView，
+ 同样可以使用 ViewImageActivity，只需要在跳转 Activity 的时候绑定好数据，如：
 
 ```
   Intent intent = new Intent(itemView.getContext(),ViewImageActivity.class);
@@ -109,7 +109,7 @@
   itemView.getContext().startActivity(intent);
 ```
 
-####注意事项
+#### 注意事项
 
 依赖的其他库
 ```
@@ -118,13 +118,13 @@
    compile 'cn.alien95:resthttp:1.0.5'
 ```
 
-###[详细用法请看Demo](https://github.com/llxdaxia/MultiView/tree/dev/demo)
+### [详细用法请看Demo](https://github.com/llxdaxia/MultiView/tree/dev/demo)
 
-###九宫格
+### 九宫格
 
 <img src="screenshot/multi_image.png" width="320" height="569" />
 <img src="screenshot/detail.png" width="320" height="569" />
 
-###自定义Adapter
+### 自定义Adapter
 
 <img src="screenshot/multi_item.png" width="320" height="569" />
