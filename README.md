@@ -4,7 +4,7 @@
 ## gradle依赖
 
 ```
-    compile 'cn.lemon:multiview:1.0.0'
+    compile 'cn.lemon:multiview:1.0.1'
 ```
     
 ## MultiView

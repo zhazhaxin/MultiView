@@ -76,27 +76,14 @@ public class MultiView extends ViewGroup {
 
         childCount = getChildCount();
 
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
-
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-
-        if (widthMode == MeasureSpec.AT_MOST) {
-            Log.i(TAG, "fuck--widthMode");
-
-        }
-        if (heightMode == MeasureSpec.AT_MOST) {
-            Log.i(TAG, "fuck--heightMode");
-        }
-        int height;
+        int height = width;
 
         if (childCount == 0) {
             width = 0;
             height = 0;
         } else if (childCount == 1) {
             childWidth = width - divideSpace * 2;
-            height = width;
         } else if (childCount == 2) {
             childWidth = (width - divideSpace * 3) / 2;
             height = childWidth + divideSpace * 2;
@@ -111,8 +98,9 @@ public class MultiView extends ViewGroup {
             if (childCount < 9) {
                 if (childCount % 3 == 0) {
                     height = childWidth * childCount / 3 + divideSpace * (childCount / 3 + 1);
-                } else
+                } else {
                     height = childWidth * (childCount / 3 + 1) + divideSpace * (childCount / 3 + 2);
+                }
             } else {
                 height = width;
             }
@@ -192,15 +180,20 @@ public class MultiView extends ViewGroup {
     }
 
     public void configView(int position) {
-        View item;
-        addView(item = mAdapter.getView(this, position));
-        mAdapter.setData(mAdapter.getItem(position));
-        item.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAdapter.setOnItemClick();
-            }
-        });
+        View item = mAdapter.getView(this, position);
+        if (item.getParent() != null && item.getParent() instanceof ViewGroup) {
+            ((ViewGroup)item.getParent()).removeView(item);
+        }
+        if (item.getParent() == null) {
+            addView(item);
+            mAdapter.setData(mAdapter.getItem(position));
+            item.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mAdapter.setOnItemClick();
+                }
+            });
+        }
     }
 
     public void addView(int position) {
@@ -342,8 +335,9 @@ public class MultiView extends ViewGroup {
             mTextNum.setText("+" + (mBitmaps.size() - 9));
         } else if (isUri) {
             mTextNum.setText("+" + (mUris.size() - 9));
-        } else
+        } else {
             mTextNum.setText("+" + (mAdapter.getCount() - 9));
+        }
 
         addView(mTextNum, position);
         Log.i(TAG, "添加最后一个view");
