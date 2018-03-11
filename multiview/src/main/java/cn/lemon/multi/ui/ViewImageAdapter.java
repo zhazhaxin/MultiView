@@ -40,6 +40,9 @@ class ViewImageAdapter extends PagerAdapter {
         } else {
             image = createImage(key);
         }
+        if (image.getParent() != null && image.getParent() instanceof ViewGroup) {
+            ((ViewGroup) image.getParent()).removeView(image);
+        }
         container.addView(image);
 
         return image;
