@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,44 +18,41 @@ import cn.alien95.resthttp.view.HttpImageView;
 class ViewImageAdapter extends PagerAdapter {
 
     private static final String TAG = "ImageAdapter";
-    private Map<String,WeakReference<HttpImageView>> mCacheImages;
+    private LinkedList<HttpImageView> mCacheImageViews = new LinkedList<>();
     private List<String> mImageUrls;
     private Context mContext;
 
     public ViewImageAdapter(List<String> data, Context context) {
         mImageUrls = data;
         mContext = context;
-        mCacheImages = new HashMap<>(5);
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
 
-        String key = mImageUrls.get(position);
+        String url = "";
+        if (position >= 0 && position < mImageUrls.size()) {
+            url = mImageUrls.get(position);
+        }
         HttpImageView image;
-        if(mCacheImages.containsKey(key)){
-            image = mCacheImages.get(key).get();
-            if (image == null){
-                image = createImage(key);
-            }
+        if (mCacheImageViews.isEmpty()){
+            image = createImage();
         } else {
-            image = createImage(key);
+            image = mCacheImageViews.getFirst();
+            mCacheImageViews.removeFirst();
         }
-        if (image.getParent() != null && image.getParent() instanceof ViewGroup) {
-            ((ViewGroup) image.getParent()).removeView(image);
+        if (image != null) {
+            image.setImageUrl(url);
+            container.addView(image);
         }
-        container.addView(image);
-
         return image;
     }
 
-    public HttpImageView createImage(String url){
+    private HttpImageView createImage(){
         HttpImageView image = new HttpImageView(mContext);
         image.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         image.setAdjustViewBounds(true);
         image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        image.setImageUrl(url);
-        mCacheImages.put(url, new WeakReference<>(image));
         return image;
     }
 
@@ -70,7 +68,10 @@ class ViewImageAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
+        if (object instanceof HttpImageView) {
+            container.removeView((View) object);
+            mCacheImageViews.add((HttpImageView) object);
+        }
     }
 
 }

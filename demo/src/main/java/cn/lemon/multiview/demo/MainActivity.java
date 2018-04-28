@@ -1,4 +1,4 @@
-package cn.alien95.multiviewlibrary;
+package cn.lemon.multiview.demo;
 
 import android.content.Context;
 import android.os.Bundle;
