@@ -211,6 +211,7 @@ public class MultiView extends ViewGroup {
      * 网络图片地址
      */
     public void setImages(List<String> data) {
+        clear();
         isImageURL = true;
         mData = data;
         if (data.size() > 9) {
